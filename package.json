@@ -1,0 +1,31 @@
+{
+    "name": "folder",
+    "version": "1.0.0",
+    "description": "Folder Project using Express, Ejs, Mongoose",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "devStart": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alexbalak21/Folder.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/alexbalak21/Folder/issues"
+    },
+    "homepage": "https://github.com/alexbalak21/Folder#readme",
+    "dependencies": {
+        "ejs": "^3.1.6",
+        "express": "^4.17.2",
+        "express-ejs-layouts": "^2.5.1",
+        "mongoose": "^6.1.6"
+    },
+    "devDependencies": {
+        "dotenv": "^12.0.4",
+        "nodemon": "^2.0.15"
+    }
+}
