@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
-const indexRouter = require("./routes/index");
+
 const { parse } = require("path/posix");
 
 app.set("view engine", "ejs");
@@ -12,10 +12,14 @@ app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+
+//ROUTERS
+const indexRouter = require("./routes/index");
+const directorRouter = require("./routes/directors");
 
 app.use("/", indexRouter);
-
-// const dbURI = "mongodb+srv://alexblack:test1234@cluster0.tljd5.mongodb.net/node-auth";
+app.use("/directors", directorRouter);
 
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
