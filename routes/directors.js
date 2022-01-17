@@ -6,9 +6,7 @@ const Director = require("../models/director");
 router.get("/", async (req, res) => {
     let searchOptions = {};
     if (req.query.name != null && req.query.name !== "") {
-        console.log(req.query.name);
         searchOptions.name = new RegExp(req.query.name, "i");
-        console.log(searchOptions.name);
     }
     try {
         const directors = await Director.find(searchOptions);
