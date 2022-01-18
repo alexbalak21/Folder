@@ -25,6 +25,10 @@ const movieSchema = new mongoose.Schema({
         default: Date.now,
     },
     poster: {
+        type: Buffer,
+        required: true,
+    },
+    posterImgType: {
         type: String,
         required: true,
     },
@@ -35,5 +39,10 @@ const movieSchema = new mongoose.Schema({
     },
 });
 
+movieSchema.virtual("posterPath").get(function () {
+    if (this.poster != null && this.posterImgType != null) {
+        return `data:${this.posterImgType};charset=utf-8;base64,${this.poster.toString("base64")}`;
+    }
+});
+
 module.exports = mongoose.model("movie", movieSchema);
-module.exports.posterImgBasePath = posterImgBasePath;
