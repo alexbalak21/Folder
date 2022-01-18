@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Director = require("../models/director");
+const Movie = require("../models/movie");
 
 //All Directors
 router.get("/", async (req, res) => {
@@ -14,17 +15,17 @@ router.get("/", async (req, res) => {
             directors: directors,
             searchOptions: req.query,
         });
-    } catch (error) {
+    } catch {
         res.redirect("/");
     }
 });
 
-//NEW
+//NEW DIRECTOR ROUTE
 router.get("/new", (req, res) => {
     res.render("directors/new", { director: new Director() });
 });
 
-//Create Director
+//CREATE DIRECTOR
 router.post("/", async (req, res) => {
     const director = new Director({ name: req.body.name });
     try {
@@ -36,6 +37,66 @@ router.post("/", async (req, res) => {
             director: director,
             errorMessage: "Error creating Director",
         });
+    }
+});
+
+//GET DIRECTOR BY ID
+router.get("/:id", async (req, res) => {
+    try {
+        const director = await Director.findById(req.params.id);
+        const movies = await Movie.find({ director: director.id }).limit(6).exec();
+        res.render("directors/show", {
+            director: director,
+            moviesByDirector: movies,
+        });
+    } catch {
+        res.redirect("/");
+    }
+});
+
+//EDIT DIRECTOR
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const director = await Director.findById(req.params.id);
+        res.render("directors/edit", { director: director });
+    } catch (error) {
+        res.redirect("/directors");
+    }
+});
+
+//PUT DIRECTOR
+router.put("/:id", async (req, res) => {
+    let director;
+    try {
+        director = await Director.findById(req.params.id);
+        director.name = req.body.name;
+        director = await director.save();
+        res.redirect(`/directors/${director.id}`);
+    } catch (error) {
+        if (director == null) {
+            res.redirect("/");
+        } else {
+            res.render("directors/edit", {
+                director: director,
+                errorMessage: "Error Updating Director",
+            });
+        }
+    }
+});
+
+//DELETE
+router.delete("/:id", async (req, res) => {
+    let director;
+    try {
+        director = await Director.findById(req.params.id);
+        let result = await director.remove();
+        res.redirect("/directors/");
+    } catch {
+        if (director == null) {
+            res.redirect("/");
+        } else {
+            res.redirect(`/directors/${director.id}`);
+        }
     }
 });
 
