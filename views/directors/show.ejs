@@ -1,10 +1,11 @@
 <h2><%= director.name %></h2>
+<div class="btn-row">
 <!-- EDIT -->
-<a href="/directors/ù<%= director.id %>/edit">Edit</a>
+<a class="btn btn-primary" href="/directors/<%= director.id %>/edit">Edit</a>
 <!-- DELETE -->
 <%- include('../partials/deleteForm', {url : `/directors/${director.id}`}) %>
+</div>
 <%if(moviesByDirector.length > 0) {%>
-
 <h2>Movies form Director</h2>
 <% moviesByDirector.forEach(movie => { %>
     <a href="/movies/<%= movie.id %> ">

@@ -1,31 +1,45 @@
-<label>Title</label>
-<input type="text" name="title" value="<%=movie.title %>" />
-<br />
-<label>Director</label>
-<select name="director">
-    <% directors.forEach(director => { %> 
-    <% if(director.id == movie.director){ %>
+<div class="form-row">
+    <div class="form-item">
+        <label>Title</label>
+        <input type="text" name="title" value="<%=movie.title %>" />
+    </div>
+    <div class="form-item">
+        <label>Director</label>
+        <select name="director">
+        <% directors.forEach(director => { %> 
+        <% if(director.id == movie.director){ %>
+        <option selected label="<%= director.name %>" value="<%= director.id %>"></option>
+        <% } else { %>
+        <option label="<%= director.name %>" value="<%= director.id %>"></option>
+        <% } %> <% }); %>
+        </select>
+    </div>
+</div>
 
-    <option selected label="<%= director.name %>" value="<%= director.id %>"></option>
-    <% } else { %>
-    <option label="<%= director.name %>" value="<%= director.id %>"></option>
-    <% } %> <% }); %>
-</select>
-<br />
-<label for="">Release Date</label>
-<input
-    type="date"
-    name="releaseDate"
-    value="<%=movie.releaseDate == null ? '' : movie.releaseDate.toISOString().split('T')[0]  %>"
-/>
-<br />
-<label>Duration (min)</label>
-<input type="number" min="1" name="duration" value="<%=movie.duration %>" />
-<br />
-<label>Poster</label>
-<input width="100" height="150" type="file" name="poster" class="filepond" />
-<br />
-<label>Description</label>
-<br />
-<textarea name="description" cols="30" rows="10"><%= movie.description %></textarea>
-<br>
+
+<div class="form-row">   
+    <div class="form-item">
+        <label>Release Date</label>
+        <input
+        type="date"
+        name="releaseDate"
+        value="<%=movie.releaseDate == null ? '' : movie.releaseDate.toISOString().split('T')[0]  %>"/>
+    </div>
+
+    <div class="form-item">
+        <label>Duration (min)</label>
+        <input type="number" min="1" name="duration" value="<%=movie.duration %>" />
+    </div>
+</div>
+
+
+<div class="form-row"> 
+    <div class="form-item no-grow">
+        <label>Poster</label>
+        <input width="100" height="150" type="file" name="poster" class="filepond" />
+    </div>
+    <div class="form-item">
+        <label>Description</label>
+        <textarea name="description" cols="30" rows="10"><%= movie.description %></textarea>
+    </div>
+</div>

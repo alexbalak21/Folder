@@ -8,8 +8,8 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
+app.set("views", __dirname + "/views");
 app.use(expressLayouts);
 app.use(methodOverride("_method"));
 app.use(express.static("public"));

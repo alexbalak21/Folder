@@ -2,6 +2,8 @@
 <form action="/movies" method="POST">
     <%- include('_form_fields') %>
 
-    <button type="submit">Create</button>
-    <a href="/movies">Cancel</a>
+    <div class="form-row form-row-end btn-row">
+    <button class="btn btn-primary" type="submit">Create</button>
+    <a class="btn btn-danger" href="/movies">Cancel</a>
+    </div>
 </form>

@@ -2,7 +2,8 @@
 
 <form action="/directors/<%= director.id %>?_method=PUT" method="POST">
     <%- include('_form_fields') %>
-
-    <button type="submit">Update</button>
-    <a href="/directors">Cancel</a>
+    <div class="form-row btn-row form-row-end"> 
+    <button class="btn btn-primary" type="submit">Update</button>
+    <a class="btn btn-danger" href="/directors">Cancel</a>
+    </div>
 </form>
