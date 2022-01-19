@@ -7,5 +7,7 @@
 
 <h2>Movies form Director</h2>
 <% moviesByDirector.forEach(movie => { %>
+    <a href="/movies/<%= movie.id %> ">
 <img height="150" width="100" src="<%= movie.posterPath %> " />
+    </a>
 <% }); %> <% } %>

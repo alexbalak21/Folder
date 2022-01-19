@@ -1,0 +1,11 @@
+<h2><%= movie.title %></h2>
+<img width="100" height="150" src="<%= movie.posterPath %> " />
+<div>
+    <p>Director : <%= movie.director.name %></p>
+    <p>Release Date : <%= movie.releaseDate.toDateString() %></p>
+    <p>Duration : <%= movie.duration %></p>
+    <p>Description : <%= movie.description %></p>
+</div>
+<a href="/movies/<%= movie.id %>/edit">Edit</a>
+<a href="/directors/<%= movie.director.id %>">View Director</a>
+<%- include('../partials/deleteForm', {url: `/movies/${movie.id}`}) %>
